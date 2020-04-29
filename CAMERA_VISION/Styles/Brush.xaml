@@ -1,0 +1,13 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="TabItemPanelBackgroundBrush" Color="{DynamicResource MahApps.Colors.Gray8}" />
+    <SolidColorBrush x:Key="TabItemBackgroundIsSelectedBrush" Color="{DynamicResource MahApps.Colors.Gray7}" />
+    <SolidColorBrush x:Key="TabItemBackgroundIsMouseOverBrush" Color="{DynamicResource MahApps.Colors.Gray9}" />
+    <SolidColorBrush x:Key="TabItemForegroundIsSelectedBrush" Color="{DynamicResource MahApps.Colors.Gray2}" />
+    <SolidColorBrush x:Key="TabItemSelectorBrush" Color="{DynamicResource MahApps.Colors.Gray.MouseOver}" />
+    <SolidColorBrush x:Key="TabControlBackgroundBrush" Color="{DynamicResource MahApps.Colors.Black}" Opacity="0.04" />
+    <SolidColorBrush x:Key="SelectedIconBorderBrush" Color="{DynamicResource MahApps.Colors.Black}" Opacity="0.1" />
+
+</ResourceDictionary>

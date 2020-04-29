@@ -1,0 +1,484 @@
+﻿<UserControl 
+    x:Class="CAMERA_VISION.ModuleCamera.Views.ViewBasler"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CAMERA_VISION.ModuleCamera.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:paz="clr-namespace:Wpf.Controls.PanAndZoom;assembly=Wpf.Controls.PanAndZoom"
+    Background="{DynamicResource MahApps.Brushes.Control.Background}"
+    mc:Ignorable="d" 
+    d:DesignHeight="500" d:DesignWidth="800"
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True" >
+
+    <UserControl.Resources>
+        <Style x:Key="ControlButtonIconStyle" TargetType="{x:Type iconPacks:PackIconMaterial}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Height" Value="22" />
+            <Setter Property="Width" Value="22" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Camera Control Buttons -->
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="38"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="38"/>
+                        <ColumnDefinition Width="38"/>
+                        <ColumnDefinition Width="38"/>
+                        <ColumnDefinition Width="38"/>
+                        <ColumnDefinition Width="38"/>
+                        <ColumnDefinition Width="38"/>
+                        <ColumnDefinition Width="38"/>
+                        <ColumnDefinition Width="38"/>
+                        <ColumnDefinition Width="38"/>
+                        <ColumnDefinition Width="38"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Margin="1" Command="{Binding ShotOnce}" IsEnabled="{Binding EnShotOnce}" 
+                            Style="{DynamicResource MahApps.Styles.Button.Circle}" 
+                            ToolTip="한번 촬영" ToolTipService.ShowOnDisabled="True" >
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="Camera" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="1" Margin="1" Command="{Binding ShotContinuous}" IsEnabled="{Binding EnShotContinuous}" 
+                            Style="{DynamicResource MahApps.Styles.Button.Circle}" 
+                            ToolTip="연속 촬영" ToolTipService.ShowOnDisabled="True" >
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="CameraBurst" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="2" Margin="1" Command="{Binding ShotStop}" IsEnabled="{Binding EnShotStop}"
+                            Style="{DynamicResource MahApps.Styles.Button.Circle}" 
+                            ToolTip="촬영 중지" ToolTipService.ShowOnDisabled="True" >
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="CameraOff" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="3" Margin="1" Command="{Binding ResetCamera}" IsEnabled="{Binding EnResetCamera}"
+                            Style="{DynamicResource MahApps.Styles.Button.Circle}"  
+                            ToolTip="카메라 리셋"  ToolTipService.ShowOnDisabled="True" >
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="CameraRetake" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="4" Margin="1" Command="{Binding Connect}" IsEnabled="{Binding EnConnect}"
+                            Style="{DynamicResource MahApps.Styles.Button.Circle}" 
+                            ToolTip="카메라 연결" ToolTipService.ShowOnDisabled="True" >
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="PowerPlug" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="5" Margin="1" Command="{Binding DisConnet}" IsEnabled="{Binding EnDisConnet}" 
+                            Style="{DynamicResource MahApps.Styles.Button.Circle}" 
+                            ToolTip="카메라 연결 해제" ToolTipService.ShowOnDisabled="True" >
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="PowerPlugOff" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="6" Margin="1" Command="{Binding ParameterSave}" IsEnabled="{Binding EnParameterSave}" 
+                            Style="{DynamicResource MahApps.Styles.Button.Circle}" 
+                            ToolTipService.ShowOnDisabled="True" >
+                        <Button.ToolTip>
+                            <TextBlock>
+                                파라미터를 파일로 저장
+                                <LineBreak/>
+                                (User Camera ID).pfs
+                            </TextBlock>
+                        </Button.ToolTip>
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="Download" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="7" Margin="1" Command="{Binding ParameterLoad}" IsEnabled="{Binding EnParameterLoad}"  
+                            Style="{DynamicResource MahApps.Styles.Button.Circle}"
+                            ToolTipService.ShowOnDisabled="True" >
+                        <Button.ToolTip>
+                            <TextBlock>
+                                파라미터 불러오기
+                                <LineBreak/>
+                                User Camera ID 와 같은 파일 이름을 불러옴
+                            </TextBlock>
+                        </Button.ToolTip>
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="Upload" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="8" Margin="1" Command="{Binding ImageSave}" IsEnabled="{Binding EnImageSave}" 
+                            Style="{DynamicResource MahApps.Styles.Button.Circle}" 
+                            ToolTipService.ShowOnDisabled="True" >
+                        <Button.ToolTip>
+                            <TextBlock>
+                                현재 이미지 저장
+                                <LineBreak/>
+                                (User Camera ID + DateTime).png
+                            </TextBlock>
+                        </Button.ToolTip>
+                        <Button.Content>
+                            <iconPacks:PackIconMaterial Kind="ContentSave" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </Button.Content>
+                    </Button>
+
+                    <ToggleButton Grid.Column="9" Margin="1" IsChecked="{Binding IsImageSaveAuto, Mode=TwoWay}"  IsEnabled="{Binding EnImageSaveAuto}" 
+                            Style="{DynamicResource MahApps.Styles.ToggleButton.Circle}"
+                            ToolTipService.ShowOnDisabled="True" >
+                        <ToggleButton.ToolTip>
+                            <TextBlock>
+                                자동 이미지 저장 토글
+                                <LineBreak/>
+                                (User Camera ID + DateTime).png
+                            </TextBlock>
+                        </ToggleButton.ToolTip>
+                        <ToggleButton.Content>
+                            <iconPacks:PackIconMaterial Kind="ContentSaveAll" Style="{StaticResource ControlButtonIconStyle}"/>
+                        </ToggleButton.Content>
+                    </ToggleButton>
+
+                </Grid>
+
+                <GroupBox Grid.Row="1" Header="Parameters" Margin="1">
+                    <StackPanel>
+
+                        <!-- User ID -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="195"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                User Camera ID (Friendly Name) :
+                            </TextBlock>
+
+                            <TextBox Grid.Row="0" Grid.Column="1" Margin="1" HorizontalContentAlignment="Center" VerticalAlignment="Center" IsEnabled="{Binding EnParamAll}"
+                                     Text="{Binding Param.UserCameraID}" />
+                        </Grid>
+
+                        <!-- Pixel Format -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="95"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                Pixel Format :
+                            </TextBlock>
+
+                            <ComboBox Grid.Row="0" Grid.Column="1" Margin="1" HorizontalContentAlignment="Center" VerticalAlignment="Center" IsEnabled="{Binding EnParamAll}"
+                                      ItemsSource="{Binding Param.PixelFormats}" SelectedItem="{Binding Param.SelectedPinxelFormat}" />
+                        </Grid>
+
+                        <!-- Trigger Mode -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="95"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="65"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                Trigger Mode :
+                            </TextBlock>
+
+                            <ComboBox Grid.Row="0" Grid.Column="1" Margin="1" HorizontalContentAlignment="Center" VerticalAlignment="Center" 
+                                      IsEnabled="{Binding EnParamAll}"
+                                      ItemsSource="{Binding Param.TriggerModes}" SelectedItem="{Binding Param.SelectedTriggerMode}" />
+
+                            <TextBlock Grid.Row="0" Grid.Column="2" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                Source :
+                            </TextBlock>
+
+                            <ComboBox Grid.Row="0" Grid.Column="3" Margin="1" HorizontalContentAlignment="Center" VerticalAlignment="Center" 
+                                      IsEnabled="{Binding EnParamAll}"
+                                      ItemsSource="{Binding Param.TriggerSources}" SelectedItem="{Binding Param.SelectedTriggerSource}" />
+                        </Grid>
+
+                        <!-- Width -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                Width :
+                            </TextBlock>
+
+                            <Label Grid.Row="0" Grid.Column="1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_Width, Path=Value}"/>
+
+                            <Label Grid.Row="0" Grid.Column="2" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_Width, Path=Minimum}"/>
+
+                            <Slider Grid.Row="0" Grid.Column="3" Margin="3" VerticalAlignment="Center" IsEnabled="{Binding EnParamAll}" 
+                                    Name="Slider_Param_Width"
+                                    Value="{Binding Param.Width, Mode=TwoWay}" 
+                                    Maximum="{Binding Param.WidthMax}" 
+                                    Minimum="{Binding Param.WidthMin}" 
+                                    TickFrequency="{Binding Param.WidthInc}" />
+
+                            <Label Grid.Row="0" Grid.Column="4" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_Width, Path=Maximum}"/>
+                        </Grid>
+
+                        <!-- Height -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            Height :
+                            </TextBlock>
+
+                            <Label Grid.Row="0" Grid.Column="1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Content="{Binding ElementName=Slider_Param_Height, Path=Value}"/>
+
+                            <Label Grid.Row="0" Grid.Column="2" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_Height, Path=Minimum}"/>
+
+                            <Slider Grid.Row="0" Grid.Column="3" Margin="3" VerticalAlignment="Center" IsEnabled="{Binding EnParamAll}"
+                                    Name="Slider_Param_Height"
+                                    Value="{Binding Param.Height, Mode=TwoWay}" 
+                                    Maximum="{Binding Param.HeightMax}" 
+                                    Minimum="{Binding Param.HeightMin}" 
+                                    TickFrequency="{Binding Param.HeightInc}" />
+
+                            <Label Grid.Row="0" Grid.Column="4" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_Height, Path=Maximum}"/>
+                        </Grid>
+
+                        <!-- Offset X -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                            X Offset :
+                            </TextBlock>
+
+                            <Label Grid.Row="0" Grid.Column="1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Content="{Binding ElementName=Slider_Param_XOffset, Path=Value}"/>
+
+                            <Label Grid.Row="0" Grid.Column="2" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_XOffset, Path=Minimum}"/>
+
+                            <Slider Grid.Row="0" Grid.Column="3" Margin="3" VerticalAlignment="Center" IsEnabled="{Binding EnParamAll}"
+                                    Name="Slider_Param_XOffset"
+                                    Value="{Binding Param.OffsetX, Mode=TwoWay}" 
+                                    Maximum="{Binding Param.OffsetXMax}" 
+                                    Minimum="{Binding Param.OffsetXMin}" 
+                                    TickFrequency="{Binding Param.OffsetXInc}" />
+
+                            <Label Grid.Row="0" Grid.Column="4" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_XOffset, Path=Maximum}"/>
+                        </Grid>
+
+                        <!-- Offset Y -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                Y Offset :
+                            </TextBlock>
+
+                            <Label Grid.Row="0" Grid.Column="1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Content="{Binding ElementName=Slider_Param_YOffset, Path=Value}"/>
+
+                            <Label Grid.Row="0" Grid.Column="2" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_YOffset, Path=Minimum}"/>
+
+                            <Slider Grid.Row="0" Grid.Column="3" Margin="3" VerticalAlignment="Center" IsEnabled="{Binding EnParamAll}"
+                                    Name="Slider_Param_YOffset"
+                                    Value="{Binding Param.OffsetY, Mode=TwoWay}" 
+                                    Maximum="{Binding Param.OffsetYMax}" 
+                                    Minimum="{Binding Param.OffsetYMin}" 
+                                    TickFrequency="{Binding Param.OffsetYInc}" />
+
+                            <Label Grid.Row="0" Grid.Column="4" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_YOffset, Path=Maximum}"/>
+                        </Grid>
+
+                        <!-- Gain -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                Gain :
+                            </TextBlock>
+
+                            <Label Grid.Row="0" Grid.Column="1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Content="{Binding ElementName=Slider_Param_Gain, Path=Value}"/>
+
+                            <Label Grid.Row="0" Grid.Column="2" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_Gain, Path=Minimum}"/>
+
+                            <Slider Grid.Row="0" Grid.Column="3" Margin="3" VerticalAlignment="Center" IsEnabled="{Binding EnParamAll}"
+                                    Name="Slider_Param_Gain"
+                                    Value="{Binding Param.Gain, Mode=TwoWay}" 
+                                    Maximum="{Binding Param.GainMax}" 
+                                    Minimum="{Binding Param.GainMin}" 
+                                    TickFrequency="{Binding Param.GainInc}" />
+
+                            <Label Grid.Row="0" Grid.Column="4" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_Gain, Path=Maximum}"/>
+                        </Grid>
+
+                        <!-- Exposure Time -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="28"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="95"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="28"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                Exposure Time :
+                            </TextBlock>
+
+                            <Label Grid.Row="0" Grid.Column="1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_ExposureTime, Path=Value}"/>
+
+                            <Label Grid.Row="0" Grid.Column="2" Margin="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_ExposureTime, Path=Minimum}"/>
+
+                            <Slider Grid.Row="0" Grid.Column="3" Margin="3" VerticalAlignment="Center" IsEnabled="{Binding EnParamAll}"
+                                    Name="Slider_Param_ExposureTime"
+                                    Value="{Binding Param.ExposureTime, Mode=TwoWay}" 
+                                    Maximum="{Binding Param.ExposureTimeMax}" 
+                                    Minimum="{Binding Param.ExposureTimeMin}" 
+                                    TickFrequency="{Binding Param.ExposureTimeInc}" />
+
+                            <Label Grid.Row="0" Grid.Column="4" Margin="1" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   Content="{Binding ElementName=Slider_Param_ExposureTime, Path=Maximum}"/>
+                        </Grid>
+
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Grid.Row="2" Header="Log Messages" Margin="1">
+                    <DataGrid x:Name="LogDataGrid" Margin="0" IsReadOnly="True"
+                              AutoGenerateColumns="False"
+                              ItemsSource="{Binding Log.BaslerLogDatas}" >
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding LogTime}" Header="Time" Width="80" />
+                            <DataGridTextColumn Binding="{Binding LogText}" Header="Log Text" Width="270" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1" Name="ImageGrid" >
+            <paz:ZoomBorder Name="zoomBorder" Stretch="Uniform" ZoomSpeed="1.2" ClipToBounds="True" Margin="1"
+                            Background="{DynamicResource MahApps.Brushes.Flyout.Background}" 
+                            Width="{Binding ElementName=ImageGrid, Path=ActualWidth}"
+                            Height="{Binding ElementName=ImageGrid, Path=ActualHeight}"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            Focusable="True" >
+
+                <Image Source="{Binding CameraImage}" />
+
+            </paz:ZoomBorder>
+
+            <ComboBox Margin="1" HorizontalAlignment="Center" VerticalAlignment="Top"
+                      ItemsSource="{Binding ElementName=zoomBorder, Path=StretchModes}" 
+                      SelectedItem="{Binding ElementName=zoomBorder, Path=Stretch}" />
+
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="11" 
+                       Foreground="{DynamicResource MahApps.Brushes.Gray4}"
+                       Text="{Binding TagText}" />
+
+            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="15" 
+                       Foreground="OrangeRed"
+                       Text="{Binding FrameRate, StringFormat=FPS : {0:n2} }" />
+
+        </Grid>
+
+    </Grid>
+</UserControl>

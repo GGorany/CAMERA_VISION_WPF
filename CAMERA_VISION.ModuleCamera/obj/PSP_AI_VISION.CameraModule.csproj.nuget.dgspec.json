@@ -1,0 +1,63 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\DHKim_Data\\MDE\\PSP_AI_VISION\\PSP_AI_VISION\\PSP_AI_VISION.CameraModule\\PSP_AI_VISION.CameraModule.csproj": {}
+  },
+  "projects": {
+    "D:\\DHKim_Data\\MDE\\PSP_AI_VISION\\PSP_AI_VISION\\PSP_AI_VISION.CameraModule\\PSP_AI_VISION.CameraModule.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\DHKim_Data\\MDE\\PSP_AI_VISION\\PSP_AI_VISION\\PSP_AI_VISION.CameraModule\\PSP_AI_VISION.CameraModule.csproj",
+        "projectName": "PSP_AI_VISION.CameraModule",
+        "projectPath": "D:\\DHKim_Data\\MDE\\PSP_AI_VISION\\PSP_AI_VISION\\PSP_AI_VISION.CameraModule\\PSP_AI_VISION.CameraModule.csproj",
+        "packagesPath": "C:\\Users\\TE Korea MDE\\.nuget\\packages\\",
+        "outputPath": "D:\\DHKim_Data\\MDE\\PSP_AI_VISION\\PSP_AI_VISION\\PSP_AI_VISION.CameraModule\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\TE Korea MDE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "dependencies": {
+            "MahApps.Metro": {
+              "target": "Package",
+              "version": "[2.0.0-alpha0748, )"
+            },
+            "MahApps.Metro.IconPacks": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "Prism.Unity": {
+              "target": "Package",
+              "version": "[7.2.0.1422, )"
+            },
+            "Wpf.Controls.PanAndZoom": {
+              "target": "Package",
+              "version": "[2.3.3, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

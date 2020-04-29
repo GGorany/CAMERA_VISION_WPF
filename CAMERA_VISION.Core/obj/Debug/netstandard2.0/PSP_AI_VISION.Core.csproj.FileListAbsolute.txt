@@ -1,0 +1,8 @@
+D:\DHKim_Data\MDE\PSP_AI_VISION\PSP_AI_VISION\PSP_AI_VISION.Core\bin\Debug\netstandard2.0\PSP_AI_VISION.Core.deps.json
+D:\DHKim_Data\MDE\PSP_AI_VISION\PSP_AI_VISION\PSP_AI_VISION.Core\bin\Debug\netstandard2.0\PSP_AI_VISION.Core.dll
+D:\DHKim_Data\MDE\PSP_AI_VISION\PSP_AI_VISION\PSP_AI_VISION.Core\bin\Debug\netstandard2.0\PSP_AI_VISION.Core.pdb
+D:\DHKim_Data\MDE\PSP_AI_VISION\PSP_AI_VISION\PSP_AI_VISION.Core\obj\Debug\netstandard2.0\PSP_AI_VISION.Core.csproj.CoreCompileInputs.cache
+D:\DHKim_Data\MDE\PSP_AI_VISION\PSP_AI_VISION\PSP_AI_VISION.Core\obj\Debug\netstandard2.0\PSP_AI_VISION.Core.AssemblyInfoInputs.cache
+D:\DHKim_Data\MDE\PSP_AI_VISION\PSP_AI_VISION\PSP_AI_VISION.Core\obj\Debug\netstandard2.0\PSP_AI_VISION.Core.AssemblyInfo.cs
+D:\DHKim_Data\MDE\PSP_AI_VISION\PSP_AI_VISION\PSP_AI_VISION.Core\obj\Debug\netstandard2.0\PSP_AI_VISION.Core.dll
+D:\DHKim_Data\MDE\PSP_AI_VISION\PSP_AI_VISION\PSP_AI_VISION.Core\obj\Debug\netstandard2.0\PSP_AI_VISION.Core.pdb
